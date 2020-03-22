@@ -6,11 +6,13 @@ A 23 key mechanical keyboard made by Koolertron. It uses an Atmel ATmega32A, USB
 
 The particular model shown in the photo above uses "red" (linear) switches and has per-key RGB LED backlighting. There are also other variations with different shells, blue (clicky) switches, backlight capabilities (solid/rgb), and keycap colors.
 
-Note that I am not affliated or associated with Koolertron. Using QMK may void your warrenty for this product.
+Note that I am not affliated or associated with Koolertron. Using QMK may void your warrenty for this product. 
+
+Once you upload a QMK firmware to your keyboard, you will lose the original firmware this keyboard came with.
 
 * Keyboard Maintainer: [Kevin Ta](https://github.com/kevinta893)
 * Hardware Supported: ATmega32A using bootloadHID
-* Hardware Availability: [Koolertron](http://www.koolertron.com/koolertron-one-handed-macro-mechanical-keyboard-rgb-led-backlit-portable-mini-onehanded-mechanical-gaming-keypad-23-fully-programmable-keys-blue-switches-p-853.html)
+* Hardware Availability: [Koolertron](http://www.koolertron.com/koolertron-one-handed-macro-mechanical-keyboard-rgb-led-backlit-portable-mini-onehanded-mechanical-gaming-keypad-23-fully-programmable-keys-blue-switches-p-874.html)
 
 Make example for this keyboard (after setting up your build environment):
 
