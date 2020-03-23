@@ -17,30 +17,24 @@
 
 // Defines layers for keycodes and keymaps
 enum layer_names {
-    _BASE
+    _NORMAL,
 };
-
-// Define Macro/Custom keycodes
-/*
-enum custom_keycodes {
-};
-*/
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Base */
-    [_BASE] = LAYOUT(
+    /* Normal */
+    [_NORMAL] = LAYOUT(
         KC_ESCAPE, KC_1, KC_2, KC_3, KC_4, KC_5,
         KC_T, KC_Q, KC_W, KC_E, KC_R, KC_Y,
         KC_V, KC_A, KC_S, KC_D, KC_F, KC_G,
         KC_Z, KC_X, KC_C, KC_B, KC_NO, KC_ENTER
-    )
+    ),
 };
 
+/*
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
-/*
 void matrix_init_user(void) {
 
 }
