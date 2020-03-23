@@ -19,28 +19,21 @@
 led_config_t g_led_config = {
     {
         //Key Matrix to LED matrix
+        { 0,  0,  1,  2 },
         { 0,  1,  2,  3 },
-        { 4,  5,  6,  7 },
-        { 8,  9, 10, 11 },
-        { 12, 13, 14, 15 },
-        { 16, 17, 18, NO_LED },
-        { 19, 20, 21, 22 }
+        { 1,  2,  3,  4 },
+        { 2,  3,  4,  5 },
+        { 3,  4,  5,  NO_LED },
+        { 4,  5,  6,  6 }
     }, {
         //LED Matrix to Physical Position (positions rounded)
-        {   0,   0 }, {  75,   0 }, { 149,   0 }, { 224,   0 },
-        {   0,  13 }, {  75,  13 }, { 149,  13 }, { 224,  13 },
-        {   0,  26 }, {  75,  26 }, { 149,  26 }, { 224,  26 },
-        {   0,  38 }, {  75,  38 }, { 149,  38 }, { 224,  38 },
-        {   0,  51 }, {  75,  51 }, { 149,  51 }, 
-        {   0,  64 }, {  75,  64 }, { 149,  64 }, { 224,  45 }
+        //The physically arrangment is basically a straight line
+        {   0,   0 }, {  37,   0 }, { 75,   0 }, { 112,   0 }, 
+        { 149,   0 }, { 187,   0 }, { 224,  0 }
     }, {
         //LED Index to lighting type flag
         LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, 
-        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT
+        LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT
     }
 };
 

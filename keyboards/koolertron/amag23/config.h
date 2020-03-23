@@ -39,9 +39,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DIODE_DIRECTION COL2ROW
 #define DEBOUNCE 5
 
-#define BACKLIGHT_LEVELS 1
-#define RGBLED_NUM 23
-#define DRIVER_LED_TOTAL 23
+#define RGBLED_NUM 7
+#define DRIVER_LED_TOTAL 7
 
 /* disable these deprecated features by default */
 #ifndef LINK_TIME_OPTIMIZATION_ENABLE
