@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "23keys.h"
+#include "amag23.h"
 
 led_config_t g_led_config = {
     {
