@@ -40,12 +40,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEBOUNCE 5
 
 #define BACKLIGHT_LEVELS 1
-#define RGBLIGHT_ANIMATIONS
-#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
 #define RGBLED_NUM 23
 #define DRIVER_LED_TOTAL 23
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
 
 /* disable these deprecated features by default */
 #ifndef LINK_TIME_OPTIMIZATION_ENABLE
