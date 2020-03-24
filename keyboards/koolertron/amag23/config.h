@@ -42,6 +42,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLED_NUM 7
 #define DRIVER_LED_TOTAL 7
 
+#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+
 /* disable these deprecated features by default */
 #ifndef LINK_TIME_OPTIMIZATION_ENABLE
   #define NO_ACTION_MACRO
