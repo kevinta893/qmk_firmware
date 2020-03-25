@@ -15,21 +15,27 @@
  */
 #include QMK_KEYBOARD_H
 
-// Defines layers for keycodes and keymaps
-enum layer_names {
-    _PROGRAMMING,
-    _GAMING,
-};
-
-// Define Macro/Custom keycodes
+// Macro/Custom keycodes
 enum custom_keycodes {
     SWITCH_TO_NEXT_LAYER,
     RGB_MATRIX_TOGGLE,
 };
 
+// Layers for keycodes and keymaps
+enum layer_names {
+    _PROGRAMMING,
+    _GAMING,
+};
 
+// Layers in order of next layer order
+#define LAYER_COUNT 2
+const uint16_t layer_list_user[LAYER_COUNT] = {
+    _PROGRAMMING,
+    _GAMING
+};
+
+// Key Maps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Base */
     [_PROGRAMMING] = LAYOUT(
         KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
         LGUI(LCTL(KC_F4)),      LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_R,                   KC_R,               KC_R,
@@ -44,33 +50,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-bool rgb_matrix_enable_state = true;
+// State variables
+bool rgb_matrix_enable_state_user = true;
+uint16_t current_key_layer_index = 0;
 
 
+/*
+ * Moves directly to the specified layer
+ */
+void go_to_key_layer(uint16_t goToLayer){
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-
-    // Custom keycodes
-    switch (keycode) {
-        case RGB_MATRIX_TOGGLE:
-            if (!record->event.pressed) {
-                if (rgb_matrix_enable_state){
-                    rgb_matrix_disable_noeeprom();
-                    rgb_matrix_enable_state = false;
-                } else {
-                    rgb_matrix_enable_noeeprom();
-                    rgb_matrix_enable_state = true;
-                }
-            }
-            break;
-        case SWITCH_TO_NEXT_LAYER:
-            break;
-    }
-
-    // Layer switching
-    uint8_t layer = biton32(layer_state);
-
-    switch (layer) {
+    // Setup layer
+    switch (goToLayer) {
         case _PROGRAMMING:
             rgb_matrix_sethsv_noeeprom(0, 255, 150);
             rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
@@ -80,30 +71,61 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
     }
 
-    return true;
-}
-
-// Runs constantly in the background, in a loop.
-void matrix_scan_user(void) {
-};
-
-void keyboard_post_init_user(void) {
-  rgb_matrix_enable_noeeprom();
-  rgb_matrix_sethsv_noeeprom(0, 255, 150);
-  rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
-  rgb_matrix_enable_state = true;
+    layer_move(goToLayer);
 }
 
 /*
-void matrix_init_user(void) {
+ * Moves directly to the next layer, loops back
+ */ 
+void go_to_next_key_layer(void){
+    current_key_layer_index = (uint16_t) (current_key_layer_index + 1) % LAYER_COUNT;
+    uint16_t nextLayer = layer_list_user[current_key_layer_index];
 
+    go_to_key_layer(nextLayer);
 }
 
-void matrix_scan_user(void) {
-
+/*
+ * Toggles lighting on/off, no eeprom set
+ */ 
+void toggle_rgb_matrix_on_off(void){
+    if (rgb_matrix_enable_state_user){
+        rgb_matrix_disable_noeeprom();
+        rgb_matrix_enable_state_user = false;
+    } else {
+        rgb_matrix_enable_noeeprom();
+        rgb_matrix_enable_state_user = true;
+    }
 }
 
-bool led_update_user(led_t led_state) {
+/*
+ * Process custom key code events
+ */ 
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+    switch (keycode) {
+        case RGB_MATRIX_TOGGLE:
+            // Turn on or off RGB lighting
+            if (!record->event.pressed) {
+                // Key up
+                toggle_rgb_matrix_on_off();
+            }
+            break;
+        case SWITCH_TO_NEXT_LAYER:
+            // Switch to next layer
+            if (!record->event.pressed) {
+                // Key Up
+                go_to_next_key_layer();
+            }
+            break;
+    }
+
     return true;
 }
-*/
+
+/*
+ * Initialization after keyboard finishes startup
+ */
+void keyboard_post_init_user(void) {
+    rgb_matrix_enable_noeeprom();
+    go_to_key_layer(layer_list_user[0]);
+}
