@@ -52,13 +52,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // State variables
 bool rgb_matrix_enable_state_user = true;
-uint16_t current_key_layer_index = 0;
+uint16_t current_key_layer_index_user = 0;
 
 
 /*
  * Moves directly to the specified layer
  */
-void go_to_key_layer(uint16_t goToLayer){
+void go_to_key_layer_user(uint16_t goToLayer){
 
     // Setup layer
     switch (goToLayer) {
@@ -77,17 +77,17 @@ void go_to_key_layer(uint16_t goToLayer){
 /*
  * Moves directly to the next layer, loops back
  */ 
-void go_to_next_key_layer(void){
-    current_key_layer_index = (uint16_t) (current_key_layer_index + 1) % LAYER_COUNT;
-    uint16_t nextLayer = layer_list_user[current_key_layer_index];
+void go_to_next_key_layer_user(void){
+    current_key_layer_index_user = (uint16_t) ((current_key_layer_index_user + 1) % LAYER_COUNT);
+    uint16_t next_layer = layer_list_user[current_key_layer_index_user];
 
-    go_to_key_layer(nextLayer);
+    go_to_key_layer_user(next_layer);
 }
 
 /*
  * Toggles lighting on/off, no eeprom set
  */ 
-void toggle_rgb_matrix_on_off(void){
+void toggle_rgb_matrix_on_off_user(void){
     if (rgb_matrix_enable_state_user){
         rgb_matrix_disable_noeeprom();
         rgb_matrix_enable_state_user = false;
@@ -105,16 +105,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case RGB_MATRIX_TOGGLE:
             // Turn on or off RGB lighting
-            if (!record->event.pressed) {
+            if (!(record->event.pressed)) {
                 // Key up
-                toggle_rgb_matrix_on_off();
+                toggle_rgb_matrix_on_off_user();
             }
             break;
         case SWITCH_TO_NEXT_LAYER:
             // Switch to next layer
-            if (!record->event.pressed) {
+            if (!(record->event.pressed)) {
                 // Key Up
-                go_to_next_key_layer();
+                go_to_next_key_layer_user();
             }
             break;
     }
@@ -127,5 +127,5 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  */
 void keyboard_post_init_user(void) {
     rgb_matrix_enable_noeeprom();
-    go_to_key_layer(layer_list_user[0]);
+    go_to_key_layer_user(layer_list_user[0]);
 }
