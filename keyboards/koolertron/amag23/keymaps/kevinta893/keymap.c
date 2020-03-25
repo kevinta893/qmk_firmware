@@ -17,31 +17,81 @@
 
 // Defines layers for keycodes and keymaps
 enum layer_names {
-    _BASE
+    _PROGRAMMING,
+    _GAMING,
 };
 
 // Define Macro/Custom keycodes
 enum custom_keycodes {
-    WIN_NEXT_DESKTOP_RIGHT,
-    WIN_NEXT_DESKTOP_LEFT,
-    WIN_NEXT_DESKTOP_INDEX,
-    WIN_NEXT_DESKTOP_NEW,
-    WIN_NEXT_DESKTOP_CLOSE
+    SWITCH_TO_NEXT_LAYER,
+    RGB_MATRIX_TOGGLE,
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Base */
-    [_BASE] = LAYOUT(
-        KC_ESCAPE, LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), KC_4, RGB_TOG,
-        LGUI(LCTL(KC_F4)), LGUI(KC_TAB), LGUI(LCTL(KC_D)), KC_E, KC_R, RGB_MODE_FORWARD,
-        LGUI(LCTL(KC_LEFT)), KC_AUDIO_VOL_UP, LGUI(LCTL(KC_RIGHT)), KC_D, RGB_VAD, RGB_MODE_REVERSE,
-        KC_MEDIA_PREV_TRACK, KC_AUDIO_VOL_DOWN, KC_MEDIA_NEXT_TRACK, KC_MEDIA_PLAY_PAUSE, KC_NO, KC_ENTER
+    [_PROGRAMMING] = LAYOUT(
+        KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
+        LGUI(LCTL(KC_F4)),      LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_R,                   KC_R,               KC_R,
+        KC_R,                   KC_AUDIO_VOL_UP,    KC_R,                   KC_D,                   KC_R,               KC_R,
+        LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_DOWN,  LGUI(LCTL(KC_RIGHT)),   KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
+    ),
+    [_GAMING] = LAYOUT(
+        KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
+        LGUI(LCTL(KC_F4)),      LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_R,                   KC_R,               KC_R,
+        KC_R,                   KC_AUDIO_VOL_UP,    KC_R,                   KC_D,                   KC_R,               KC_R,
+        LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_DOWN,  LGUI(LCTL(KC_RIGHT)),   KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
     )
 };
 
+bool rgb_matrix_enable_state = true;
+
+
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+    // Custom keycodes
+    switch (keycode) {
+        case RGB_MATRIX_TOGGLE:
+            if (!record->event.pressed) {
+                if (rgb_matrix_enable_state){
+                    rgb_matrix_disable_noeeprom();
+                    rgb_matrix_enable_state = false;
+                } else {
+                    rgb_matrix_enable_noeeprom();
+                    rgb_matrix_enable_state = true;
+                }
+            }
+            break;
+        case SWITCH_TO_NEXT_LAYER:
+            break;
+    }
+
+    // Layer switching
+    uint8_t layer = biton32(layer_state);
+
+    switch (layer) {
+        case _PROGRAMMING:
+            rgb_matrix_sethsv_noeeprom(0, 255, 150);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+            break;
+        case _GAMING:
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_RAINBOW_MOVING_CHEVRON);
+            break;
+    }
+
     return true;
+}
+
+// Runs constantly in the background, in a loop.
+void matrix_scan_user(void) {
+};
+
+void keyboard_post_init_user(void) {
+  rgb_matrix_enable_noeeprom();
+  rgb_matrix_sethsv_noeeprom(0, 255, 150);
+  rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+  rgb_matrix_enable_state = true;
 }
 
 /*
