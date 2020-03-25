@@ -39,14 +39,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_PROGRAMMING] = LAYOUT(
         KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
         LGUI(LCTL(KC_F4)),      LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_R,                   KC_R,               KC_R,
-        KC_R,                   KC_AUDIO_VOL_UP,    KC_R,                   KC_D,                   KC_R,               KC_R,
-        LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_DOWN,  LGUI(LCTL(KC_RIGHT)),   KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
+        LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_UP,    LGUI(LCTL(KC_RIGHT)),   KC_D,                   KC_R,               KC_R,
+        KC_MEDIA_NEXT_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
     ),
     [_GAMING] = LAYOUT(
-        KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
-        LGUI(LCTL(KC_F4)),      LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_R,                   KC_R,               KC_R,
+        KC_ESCAPE,              KC_F1,              KC_F2,                  KC_F12,                 RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
+        KC_R,                   LALT(KC_F10),       LALT(KC_F9),            LALT(KC_F1),            LSFT(KC_TAB),       KC_R,
         KC_R,                   KC_AUDIO_VOL_UP,    KC_R,                   KC_D,                   KC_R,               KC_R,
-        LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_DOWN,  LGUI(LCTL(KC_RIGHT)),   KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
+        KC_MEDIA_PREV_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
     )
 };
 
