@@ -29,7 +29,7 @@ enum layer_names {
 
 // Layers in order of next layer order
 #define LAYER_COUNT 2
-const uint16_t layer_list_user[LAYER_COUNT] = {
+const uint8_t layer_list_user[LAYER_COUNT] = {
     _PROGRAMMING,
     _GAMING
 };
@@ -52,13 +52,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // State variables
 bool rgb_matrix_enable_state_user = true;
-uint16_t current_key_layer_index_user = 0;
+uint8_t current_key_layer_index_user = 0;
 
 
 /*
  * Moves directly to the specified layer
  */
-void go_to_key_layer_user(uint16_t goToLayer){
+void go_to_key_layer_user(uint8_t goToLayer){
 
     // Setup layer
     switch (goToLayer) {
@@ -67,7 +67,7 @@ void go_to_key_layer_user(uint16_t goToLayer){
             rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
             break;
         case _GAMING:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_RAINBOW_MOVING_CHEVRON);
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_LEFT_RIGHT);
             break;
     }
 
@@ -78,8 +78,8 @@ void go_to_key_layer_user(uint16_t goToLayer){
  * Moves directly to the next layer, loops back
  */ 
 void go_to_next_key_layer_user(void){
-    current_key_layer_index_user = (uint16_t) ((current_key_layer_index_user + 1) % LAYER_COUNT);
-    uint16_t next_layer = layer_list_user[current_key_layer_index_user];
+    current_key_layer_index_user = (uint8_t) ((current_key_layer_index_user + 1) % LAYER_COUNT);
+    uint8_t next_layer = layer_list_user[current_key_layer_index_user];
 
     go_to_key_layer_user(next_layer);
 }
