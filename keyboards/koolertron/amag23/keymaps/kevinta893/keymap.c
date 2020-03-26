@@ -43,9 +43,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_MEDIA_NEXT_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
     ),
     [_GAMING] = LAYOUT(
-        KC_ESCAPE,              KC_F1,              KC_F2,                  KC_F12,                 RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
+        KC_ESCAPE,              LCTL(LSFT(KC_F1)),  LCTL(LSFT(KC_F2)),      LCTL(LSFT(KC_F3)),      RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
         KC_R,                   LALT(KC_F10),       KC_R,                   LALT(KC_F9),            LSFT(KC_TAB),       KC_R,
-        KC_R,                   KC_AUDIO_VOL_UP,    KC_R,                   KC_D,                   KC_R,               KC_R,
+        KC_R,                   KC_AUDIO_VOL_UP,    KC_R,                   KC_D,                   KC_F12,             KC_R,
         KC_MEDIA_PREV_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              LALT(KC_F1)
     )
 };
@@ -58,10 +58,10 @@ uint8_t current_key_layer_index_user = 0;
 /*
  * Moves directly to the specified layer
  */
-void go_to_key_layer_user(uint8_t goToLayer){
+void go_to_key_layer_user(uint8_t go_to_layer){
 
     // Setup layer
-    switch (goToLayer) {
+    switch (go_to_layer) {
         case _PROGRAMMING:
             rgb_matrix_sethsv_noeeprom(0, 255, 150);
             rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
@@ -71,7 +71,7 @@ void go_to_key_layer_user(uint8_t goToLayer){
             break;
     }
 
-    layer_move(goToLayer);
+    layer_move(go_to_layer);
 }
 
 /*
