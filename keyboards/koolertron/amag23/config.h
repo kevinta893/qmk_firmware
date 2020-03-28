@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DEVICE_VER 0x0001
 #define MANUFACTURER Koolertron
 #define PRODUCT AMAG23
-#define DESCRIPTION A 23 key, RGB backlit mechanical keyboard
+#define DESCRIPTION "A 23 key, RGB backlit mechanical keyboard"
 
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 4
