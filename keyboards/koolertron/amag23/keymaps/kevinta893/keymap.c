@@ -18,7 +18,6 @@
 // Macro/Custom keycodes
 enum custom_keycodes {
     SWITCH_TO_NEXT_LAYER,
-    RGB_MATRIX_TOGGLE,
 };
 
 // Layers for keycodes and keymaps
@@ -37,13 +36,13 @@ const uint8_t layer_list_user[LAYER_COUNT] = {
 // Key Maps
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_PROGRAMMING] = LAYOUT(
-        KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
+        KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_TOG,            SWITCH_TO_NEXT_LAYER,
         LGUI(LCTL(KC_F4)),      LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_R,                   KC_R,               KC_R,
         LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_UP,    LGUI(LCTL(KC_RIGHT)),   KC_D,                   KC_R,               KC_R,
         KC_MEDIA_NEXT_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
     ),
     [_GAMING] = LAYOUT(
-        KC_ESCAPE,              LCTL(LSFT(KC_F1)),  LCTL(LSFT(KC_F2)),      LCTL(LSFT(KC_F3)),      RGB_MATRIX_TOGGLE,  SWITCH_TO_NEXT_LAYER,
+        KC_ESCAPE,              LCTL(LSFT(KC_F1)),  LCTL(LSFT(KC_F2)),      LCTL(LSFT(KC_F3)),      RGB_TOG,            SWITCH_TO_NEXT_LAYER,
         KC_R,                   LALT(KC_F10),       KC_R,                   LALT(KC_F9),            LSFT(KC_TAB),       KC_R,
         KC_R,                   KC_AUDIO_VOL_UP,    KC_R,                   KC_D,                   KC_F12,             KC_R,
         KC_MEDIA_PREV_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              LALT(KC_F1)
@@ -51,7 +50,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 // State variables
-bool rgb_matrix_enable_state_user = true;
 uint8_t current_key_layer_index_user = 0;
 
 
@@ -63,11 +61,11 @@ void go_to_key_layer_user(uint8_t go_to_layer){
     // Setup layer
     switch (go_to_layer) {
         case _PROGRAMMING:
-            rgb_matrix_sethsv_noeeprom(0, 255, 150);
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_SOLID_COLOR);
+            rgblight_setrgb(154, 0, 0);
+            rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
             break;
         case _GAMING:
-            rgb_matrix_mode_noeeprom(RGB_MATRIX_CYCLE_LEFT_RIGHT);
+            rgblight_mode_noeeprom(RGBLIGHT_MODE_RAINBOW_SWIRL + 5);
             break;
     }
 
@@ -85,31 +83,11 @@ void go_to_next_key_layer_user(void){
 }
 
 /*
- * Toggles lighting on/off, no eeprom set
- */ 
-void toggle_rgb_matrix_on_off_user(void){
-    if (rgb_matrix_enable_state_user){
-        rgb_matrix_disable_noeeprom();
-        rgb_matrix_enable_state_user = false;
-    } else {
-        rgb_matrix_enable_noeeprom();
-        rgb_matrix_enable_state_user = true;
-    }
-}
-
-/*
  * Process custom key code events
  */ 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     switch (keycode) {
-        case RGB_MATRIX_TOGGLE:
-            // Turn on or off RGB lighting
-            if (!(record->event.pressed)) {
-                // Key up
-                toggle_rgb_matrix_on_off_user();
-            }
-            break;
         case SWITCH_TO_NEXT_LAYER:
             // Switch to next layer
             if (!(record->event.pressed)) {
@@ -126,6 +104,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
  * Initialization after keyboard finishes startup
  */
 void keyboard_post_init_user(void) {
-    rgb_matrix_enable_noeeprom();
+    rgblight_enable_noeeprom();
     go_to_key_layer_user(layer_list_user[0]);
 }

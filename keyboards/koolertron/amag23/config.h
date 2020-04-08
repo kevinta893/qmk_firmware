@@ -26,6 +26,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT AMAG23
 #define DESCRIPTION "A 23 key, RGB backlit mechanical keyboard"
 
+#define RGBLED_NUM 7
+#define RGBLIGHT_LED_MAP { 6,5,4,3,2,1,0 }
+
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 4
 
@@ -39,10 +42,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DIODE_DIRECTION COL2ROW
 #define DEBOUNCE 5
 
-#define RGBLED_NUM 7
-#define DRIVER_LED_TOTAL 7
-
-#define RGB_DISABLE_WHEN_USB_SUSPENDED true
+#define BACKLIGHT_LEVELS 1
+#define RGBLIGHT_ANIMATIONS
 
 /* disable these deprecated features by default */
 #ifndef LINK_TIME_OPTIMIZATION_ENABLE
