@@ -17,3 +17,8 @@
 #pragma once
 
 // place overrides here
+
+#ifdef RGBLIGHT_LIMIT_VAL
+#undef RGBLIGHT_LIMIT_VAL
+#endif
+#define RGBLIGHT_LIMIT_VAL 200  //override
