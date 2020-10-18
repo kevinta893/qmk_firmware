@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             RGB_TOG,            SWITCH_TO_NEXT_LAYER,
         KC_NO,                  LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_NO,                  KC_NO,              KC_NO,
         LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_UP,    LGUI(LCTL(KC_RIGHT)),   KC_NO,                  KC_NO,              KC_NO,
-        KC_MEDIA_NEXT_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
+        KC_MEDIA_PREV_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
     ),
     [_GAMING] = LAYOUT(
         KC_ESCAPE,              LCTL(LSFT(KC_F1)),  LCTL(LSFT(KC_F2)),      LCTL(LSFT(KC_F3)),      RGB_TOG,            SWITCH_TO_NEXT_LAYER,
