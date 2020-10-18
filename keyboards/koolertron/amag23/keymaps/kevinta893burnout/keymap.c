@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESCAPE,              LCTL(KC_X),         LCTL(KC_C),             LCTL(KC_V),             KC_NO,              SWITCH_TO_NEXT_LAYER,
         KC_NO,                  LGUI(KC_TAB),       LGUI(LCTL(KC_D)),       KC_NO,                  KC_NO,              KC_NO,
         LGUI(LCTL(KC_LEFT)),    KC_AUDIO_VOL_UP,    LGUI(LCTL(KC_RIGHT)),   KC_NO,                  KC_NO,              KC_NO,
-        KC_MEDIA_NEXT_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
+        KC_MEDIA_PREV_TRACK,    KC_AUDIO_VOL_DOWN,  KC_MEDIA_NEXT_TRACK,    KC_MEDIA_PLAY_PAUSE,    KC_NO,              KC_ENTER
     ),
     [_FIDGET] = LAYOUT(
         KC_NO,      KC_NO,      KC_NO,      KC_NO,      KC_NO,      SWITCH_TO_NEXT_LAYER,
